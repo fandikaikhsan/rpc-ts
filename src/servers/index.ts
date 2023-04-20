@@ -5,7 +5,7 @@ import { publicProcedure, router } from "./trpc"
 const prisma = new PrismaClient()
 
 export const appRouter = router({
-  songById: publicProcedure.input(z.string()).query(async (opts) => {
+  songByTitle: publicProcedure.input(z.string()).query(async (opts) => {
     const { input } = opts
     const song = await prisma.songs.findFirst({
       where: {
@@ -15,3 +15,5 @@ export const appRouter = router({
     return song
   }),
 })
+
+export type AppRouter = typeof appRouter
